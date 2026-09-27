@@ -1,0 +1,246 @@
+/* ---- Reklam öğelerini gizle ---- */
+ytd-ad-slot-renderer,
+ytd-in-feed-ad-layout-renderer,
+ytd-banner-promo-renderer,
+ytd-statement-banner-renderer,
+ytd-promoted-sparkles-web-renderer,
+ytd-promoted-sparkles-text-search-renderer,
+ytd-promoted-video-renderer,
+ytd-display-ad-renderer,
+ytd-compact-promoted-video-renderer,
+ytd-action-companion-ad-renderer,
+ytd-player-legacy-desktop-watch-ads-renderer,
+ytd-search-pyv-renderer,
+ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"],
+ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
+ytd-rich-section-renderer:has(ytd-ad-slot-renderer),
+ytd-merch-shelf-renderer,
+#masthead-ad,
+#player-ads,
+.ytp-ad-overlay-container,
+.ytp-ad-overlay-slot,
+.ytp-ad-image-overlay,
+tp-yt-paper-dialog:has(ytd-enforcement-message-view-model),
+ytd-enforcement-message-view-model {
+  display: none !important;
+}
+
+/* ---- Tubify arayüz öğeleri ---- */
+#pt-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.05);
+  color: #0f0f0f;
+  font: 500 14px/36px "Roboto", "Arial", sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  flex: none;
+}
+#pt-dl-btn:hover { background: rgba(0, 0, 0, 0.1); }
+html[dark] #pt-dl-btn { background: rgba(255, 255, 255, 0.1); color: #f1f1f1; }
+html[dark] #pt-dl-btn:hover { background: rgba(255, 255, 255, 0.2); }
+#pt-dl-btn svg { width: 22px; height: 22px; fill: currentColor; }
+#pt-dl-btn.pt-floating {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2300;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  background: #cc0000;
+  color: #fff;
+}
+
+#pt-dl-menu {
+  position: fixed;
+  z-index: 2400;
+  min-width: 250px;
+  padding: 8px 0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0f0f0f;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  font: 400 14px "Roboto", "Arial", sans-serif;
+}
+#pt-dl-menu .pt-item {
+  display: block;
+  width: 100%;
+  padding: 9px 18px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+#pt-dl-menu .pt-item:hover { background: rgba(0, 0, 0, 0.08); }
+#pt-dl-menu .pt-sep { height: 1px; margin: 6px 0; background: rgba(0, 0, 0, 0.1); }
+html[dark] #pt-dl-menu { background: #282828; color: #f1f1f1; box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5); }
+html[dark] #pt-dl-menu .pt-item:hover { background: rgba(255, 255, 255, 0.1); }
+html[dark] #pt-dl-menu .pt-sep { background: rgba(255, 255, 255, 0.1); }
+#pt-dl-menu .pt-head { padding: 4px 18px 6px; font-size: 12px; opacity: 0.7; }
+
+#pt-toasts {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 2500;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.pt-toast {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 460px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #212121;
+  color: #fff;
+  font: 400 14px "Roboto", "Arial", sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  animation: pt-in 0.18s ease-out;
+}
+.pt-toast button {
+  border: none;
+  background: none;
+  color: #3ea6ff;
+  font: 500 14px "Roboto", "Arial", sans-serif;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+}
+@keyframes pt-in { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.pt-sb-bar {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+}
+.pt-sb-seg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 2px;
+  opacity: 0.85;
+}
+
+/* ================= YouTube Music: Tubify düzeni ================= */
+/* YTM'nin sol menüsü yerine Tubify yan paneli kullanılır. */
+ytmusic-app-layout { --ytmusic-guide-width: 0px !important; }
+ytmusic-app-layout > #guide-wrapper,
+ytmusic-app-layout > #mini-guide,
+ytmusic-app-layout > #mini-guide-background,
+ytmusic-app-layout > tp-yt-app-drawer,
+ytmusic-nav-bar .left-content { display: none !important; }
+
+/* Hesap / Premium isteyen öğeler: kendi kitaplığımız ve indiricimiz bunların yerini alır. */
+ytmusic-like-button-renderer,
+ytmusic-nav-bar a.sign-in-link,
+ytmusic-guide-signin-promo-renderer,
+ytmusic-mealbar-promo-renderer,
+ytmusic-statement-banner-renderer,
+ytmusic-premium-upsell-renderer,
+ytmusic-download-button-renderer,
+tp-yt-paper-dialog:has(ytmusic-mealbar-promo-renderer),
+tp-yt-paper-dialog:has(ytmusic-premium-upsell-renderer),
+tp-yt-paper-dialog:has(ytmusic-download-button-renderer),
+ytmusic-responsive-header-renderer ytmusic-download-button-renderer,
+html[data-pt-queue] ytmusic-player-bar .right-controls-buttons > .shuffle,
+html[data-pt-queue] ytmusic-player-bar .right-controls-buttons > .repeat { display: none !important; }
+
+/* Çalar çubuğu düğmelerimiz */
+.pt-bar-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; margin: 0 2px; padding: 0;
+  border: none; border-radius: 50%; background: none; color: rgba(255, 255, 255, 0.72);
+  cursor: pointer; flex: none; transition: color 0.15s, transform 0.1s;
+}
+.pt-bar-btn:hover { color: #fff; }
+.pt-bar-btn:active { transform: scale(0.92); }
+.pt-bar-btn svg { width: 22px; height: 22px; fill: currentColor; }
+.pt-bar-btn.on { color: #1ed760; }
+#pt-like-btn.on { color: #ff3d6e; }
+#pt-dl-btn.pt-compact {
+  width: 40px; height: 40px; padding: 0; margin: 0 2px; justify-content: center;
+  border-radius: 50%; background: none !important; color: rgba(255, 255, 255, 0.72);
+}
+#pt-dl-btn.pt-compact:hover { color: #fff; }
+
+/* Spotify tarzı bağlam menüsü */
+.ptm {
+  position: fixed; z-index: 99999; min-width: 240px; max-width: 340px; max-height: 70vh; overflow-y: auto;
+  padding: 4px; border-radius: 8px; background: #282828; color: #eaeaea;
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.5), 0 6px 8px rgba(0, 0, 0, 0.3);
+  font: 400 14px/1.3 "YouTube Sans", "Roboto", "Segoe UI", sans-serif;
+  animation: ptm-in 0.12s ease-out;
+}
+@keyframes ptm-in { from { opacity: 0; transform: translateY(-4px) scale(0.98); } to { opacity: 1; transform: none; } }
+.ptm-item {
+  display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 10px 10px 12px;
+  border: none; border-radius: 3px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.ptm-item:hover, .ptm-item.active { background: #3e3e3e; color: #fff; }
+.ptm-item svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.85; flex: none; }
+.ptm-noicon { width: 18px; flex: none; }
+.ptm-label { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ptm-hint { color: #a7a7a7; font-size: 12px; }
+.ptm-arrow { color: #a7a7a7; font-size: 18px; line-height: 1; }
+.ptm-sep { height: 1px; margin: 4px 6px; background: rgba(255, 255, 255, 0.1); }
+.ptm-header {
+  padding: 10px 12px 8px; color: #a7a7a7; font-size: 12px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;
+}
+.ptm-new { display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 12px; }
+.ptm-new svg { width: 18px; height: 18px; fill: #a7a7a7; flex: none; }
+.ptm-new input {
+  flex: 1; min-width: 0; height: 32px; padding: 0 10px; border: 1px solid #535353; border-radius: 4px;
+  background: #3e3e3e; color: #fff; font: inherit; outline: none;
+}
+.ptm-new input:focus { border-color: #fff; }
+.ptm-new button {
+  height: 32px; padding: 0 14px; border: none; border-radius: 16px; background: #fff; color: #000;
+  font: 700 13px inherit; cursor: pointer;
+}
+.ptm-new button:hover { transform: scale(1.04); }
+
+/* Şerit modunda (kendi liste sayfamız açıkken) yalnızca çalar çubuğu görünür */
+html[data-pt-strip] ytmusic-player-bar { cursor: pointer; }
+html[data-pt-strip] #pt-toasts { display: none; }
+html[data-pt-music] #pt-toasts { bottom: 96px; }
+/* Şerit modunda yalnızca çalar çubuğu kalır: üst çubuk, kaydırma çubuğu ve mini oynatıcı gizlenir. */
+html[data-pt-strip] ytmusic-nav-bar,
+html[data-pt-strip] #nav-bar-background,
+html[data-pt-strip] #nav-bar-divider,
+html[data-pt-strip] ytmusic-content-update-chip { display: none !important; }
+html[data-pt-strip] ytmusic-player-page { visibility: hidden !important; }
+html[data-pt-strip], html[data-pt-strip] body { overflow: hidden !important; }
+html[data-pt-strip] ::-webkit-scrollbar { display: none !important; }
+html[data-pt-strip] ytmusic-player-bar {
+  position: fixed !important; top: 0 !important; bottom: auto !important; left: 0 !important; right: 0 !important;
+  transform: none !important; visibility: visible !important;
+}
+html[data-pt-strip] #player-bar-background { display: none !important; }
+
+/* Başlıktaki "Kitaplığa kaydet": Tubify kitaplığına kaydedildiyse yeşil */
+ytmusic-toggle-button-renderer[data-pt-saved] yt-icon,
+ytmusic-toggle-button-renderer[data-pt-saved] button { color: #1ed760 !important; fill: #1ed760 !important; }
+ytmusic-toggle-button-renderer[data-pt-busy] { opacity: 0.5; pointer-events: none; }
+
+/* YTM'nin köşedeki mini oynatıcısı gösterilmez (ses/görüntü arka planda sürer). */
+ytmusic-app-layout[player-ui-state="MINIPLAYER"] ytmusic-player-page,
+ytmusic-app-layout[player-ui-state="MINIPLAYER"] ytmusic-player { visibility: hidden !important; }
+/* Videolar kapalıyken görüntü yerine yalnızca kapak */
+html[data-pt-novideo] ytmusic-player video { opacity: 0 !important; }
+html[data-pt-novideo] ytmusic-player #song-image, html[data-pt-novideo] ytmusic-player .thumbnail-image-wrapper { display: block !important; opacity: 1 !important; visibility: visible !important; }
+html[data-pt-novideo] ytmusic-av-toggle { display: none !important; }

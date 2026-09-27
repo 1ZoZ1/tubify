@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Bağlantı yok · Tubify</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { background: #0f0f0f; color: #f1f1f1; font: 15px "Segoe UI", Arial, sans-serif; display: grid; place-items: center; }
+    .box { text-align: center; max-width: 480px; padding: 24px; }
+    h1 { font-size: 22px; font-weight: 600; }
+    p { color: #aaa; }
+    button { background: #ff0033; color: #fff; border: none; border-radius: 18px; height: 38px; padding: 0 22px; font: 600 14px inherit; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1 id="title">YouTube'a bağlanılamadı</h1>
+    <p id="desc">İnternet bağlantınızı kontrol edin.</p>
+    <button id="retry">Tekrar dene</button>
+    <p><small id="hint">Bağlantı gelince otomatik yeniden denenir.</small></p>
+  </div>
+  <script>
+    const q = new URLSearchParams(location.search);
+    const target = /^https:\/\/([\w-]+\.)*(youtube\.com|youtu\.be)\//.test(q.get('url') || '') ? q.get('url') : 'https://www.youtube.com/';
+    // Bu sayfa YouTube görünümüne yüklenir (sözlük erişimi yok); iki dilin metni burada durur.
+    const EN = q.get('lang') === 'en';
+    const $ = (id) => document.getElementById(id);
+    if (EN) {
+      document.documentElement.lang = 'en';
+      document.title = 'No connection · Tubify';
+      $('title').textContent = "Couldn't connect to YouTube";
+      $('desc').textContent = 'Check your internet connection.';
+      $('retry').textContent = 'Try again';
+      $('hint').textContent = 'It will retry automatically when the connection is back.';
+    }
+    if (q.get('desc')) $('desc').textContent = EN ? 'Error: ' + q.get('desc') + '. Check your internet connection.' : 'Hata: ' + q.get('desc') + '. İnternet bağlantınızı kontrol edin.';
+    const go = () => { location.href = target; };
+    document.getElementById('retry').onclick = go;
+    window.addEventListener('online', go);
+    setInterval(() => { if (navigator.onLine) go(); }, 15000);
+  </script>
+</body>
+</html>

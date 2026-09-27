@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.ytimg.com data:; style-src 'self'; script-src 'self'">
+  <title>Tubify · İndirmeler</title>
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img class="logo" src="../shell/logo.png" alt=""> Tubify</div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="downloads">İndirmeler</button>
+      <button class="tab" data-tab="settings">Ayarlar</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tab-downloads" class="panel active">
+      <form id="add-form" class="add">
+        <input id="url" type="text" placeholder="YouTube video ya da oynatma listesi bağlantısı" autocomplete="off" spellcheck="false">
+        <button type="button" id="paste" class="ghost" title="Panodan yapıştır">Yapıştır</button>
+        <select id="preset"></select>
+        <label class="check" title="Bağlantı bir oynatma listesi içeriyorsa tüm listeyi indir"><input type="checkbox" id="playlist"> Tüm liste</label>
+        <button type="submit" class="primary">İndir</button>
+      </form>
+      <div id="add-error" class="error-line" hidden></div>
+      <div id="tools-banner" class="banner" hidden></div>
+
+      <div class="list-head">
+        <span id="summary"></span>
+        <span class="spacer"></span>
+        <button class="ghost small" id="open-folder">Klasörü aç</button>
+        <button class="ghost small" id="clear">Bitenleri temizle</button>
+      </div>
+      <ul id="list"></ul>
+      <div id="empty" class="empty">
+        <div class="empty-icon">⬇</div>
+        <p>Henüz indirme yok.</p>
+        <p class="muted">YouTube'da bir videonun altındaki <b>İndir</b> butonunu kullanın, bir bağlantıya sağ tıklayın ya da yukarıya bağlantı yapıştırın.</p>
+      </div>
+    </section>
+
+    <section id="tab-settings" class="panel">
+      <div class="card">
+        <h2>Uygulama</h2>
+        <div class="row">
+          <div class="label">Dil / Language<small>Arayüz ve YouTube dili. Değişiklik yeniden başlatınca uygulanır.</small></div>
+          <select id="s-lang"><option value="tr">Türkçe</option><option value="en">English</option></select>
+        </div>
+        <div class="row"><div class="label">Kapatınca bildirim alanına küçült<small>Pencere kapansa da müzik ve indirmeler sürer. Tamamen çıkmak için simgeye sağ tıklayın ya da Ctrl+Q.</small></div><input type="checkbox" class="switch" id="s-tray"></div>
+      </div>
+
+      <div class="card">
+        <h2>İndirme</h2>
+        <div class="row">
+          <div class="label">İndirme klasörü<small id="dir"></small></div>
+          <button class="ghost" id="choose-dir">Değiştir</button>
+        </div>
+        <div class="row">
+          <div class="label">Varsayılan kalite</div>
+          <select id="s-preset"></select>
+        </div>
+        <div class="row">
+          <div class="label">Aynı anda indirme sayısı</div>
+          <select id="s-concurrency"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+        </div>
+        <div class="row"><div class="label">Kapak resmini dosyaya göm</div><input type="checkbox" class="switch" id="s-thumb"></div>
+        <div class="row"><div class="label">Bölümleri (chapters) göm</div><input type="checkbox" class="switch" id="s-chapters"></div>
+        <div class="row">
+          <div class="label">Altyazıları göm<small>Diller (virgülle): <input id="s-sublangs" type="text" class="inline"></small></div>
+          <input type="checkbox" class="switch" id="s-subs">
+        </div>
+        <div class="row"><div class="label">SponsorBlock bölümlerini indirilen dosyadan kes<small>Aşağıda seçili kategoriler dosyadan çıkarılır</small></div><input type="checkbox" class="switch" id="s-sbcut"></div>
+        <div class="row">
+          <div class="label">YouTube oturumunu indirmelerde kullan<small>Yaş sınırlı / üyelere özel videolar ve bot doğrulaması için</small></div>
+          <select id="s-cookies">
+            <option value="auto">Gerektiğinde (önerilen)</option>
+            <option value="always">Her zaman</option>
+            <option value="never">Asla</option>
+          </select>
+        </div>
+        <div class="row"><div class="label">İndirme bitince Windows bildirimi göster</div><input type="checkbox" class="switch" id="s-notify"></div>
+      </div>
+
+      <div class="card">
+        <h2>Reklam engelleme</h2>
+        <div class="row">
+          <div class="label">Reklamları engelle<small>uBlock Origin filtreleri + oynatıcı reklam ayıklayıcı + otomatik atlayıcı. Değişiklik sayfa yenilenince tam uygulanır.</small></div>
+          <input type="checkbox" class="switch" id="s-adblock">
+        </div>
+        <div class="row">
+          <div class="label">Filtre listeleri<small id="filters-info">Günde bir otomatik güncellenir</small></div>
+          <button class="ghost" id="refresh-filters">Şimdi güncelle</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Müzik</h2>
+        <div class="row">
+          <div class="label">Müzik videolarını kapat (yalnızca kapak)<small>Video yerine kapak gösterilir ve görüntü en düşük kaliteye iner: daha az veri, daha az işlemci. Ses kalitesi etkilenmez.</small></div>
+          <input type="checkbox" class="switch" id="s-novideo">
+        </div>
+        <div class="row">
+          <div class="label">Müzik için varsayılan indirme biçimi</div>
+          <select id="s-musicpreset"><option value="mp3">MP3</option><option value="m4a">M4A (AAC)</option><option value="opus">Opus (orijinal)</option></select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>SponsorBlock</h2>
+        <div class="row"><div class="label">SponsorBlock'u etkinleştir</div><input type="checkbox" class="switch" id="s-sb"></div>
+        <div class="row"><div class="label">Atlanınca bildirim göster (geri al seçeneğiyle)</div><input type="checkbox" class="switch" id="s-sbnotify"></div>
+        <div class="row"><div class="label">İlerleme çubuğunda bölümleri işaretle</div><input type="checkbox" class="switch" id="s-sbmarkers"></div>
+        <h3>Otomatik atlanacak bölümler</h3>
+        <div id="sb-cats" class="cats"></div>
+      </div>
+
+      <div class="card">
+        <h2>Araçlar</h2>
+        <div class="row"><div class="label">yt-dlp<small id="v-ytdlp">…</small></div>
+          <select id="s-channel"><option value="stable">Kararlı sürüm</option><option value="nightly">Gecelik (en hızlı düzeltmeler)</option></select>
+        </div>
+        <div class="row"><div class="label">Deno (JS motoru)<small id="v-deno">…</small></div></div>
+        <div class="row"><div class="label">FFmpeg<small id="v-ffmpeg">…</small></div></div>
+        <div class="row">
+          <div class="label">yt-dlp her gün otomatik güncellenir; bir indirme YouTube değişikliği yüzünden başarısız olursa hemen güncellenip tekrar denenir.</div>
+          <button class="ghost" id="update-tools">Şimdi güncelle</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Gizlilik</h2>
+        <div class="row">
+          <div class="label">Oturumu kapat ve tüm tarama verilerini sil</div>
+          <button class="danger" id="clear-data">Verileri sil</button>
+        </div>
+      </div>
+      <p class="muted center" id="about"></p>
+    </section>
+  </main>
+
+  <template id="item-tpl">
+    <li class="item">
+      <img class="thumb" alt="">
+      <div class="info">
+        <div class="title"></div>
+        <div class="meta"></div>
+        <div class="bar"><div class="fill"></div></div>
+        <div class="err"></div>
+      </div>
+      <div class="actions"></div>
+    </li>
+  </template>
+  <script src="../i18n/renderer.js"></script>
+  <script src="manager.js"></script>
+</body>
+</html>

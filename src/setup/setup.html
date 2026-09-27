@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'">
+  <title>Tubify</title>
+  <link rel="stylesheet" href="setup.css">
+</head>
+<body>
+  <div class="glow"></div>
+  <header class="drag">
+    <span class="step" id="step"></span>
+    <button class="close" id="close" aria-label="Kapat"><svg viewBox="0 0 24 24"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7l-1.4-1.4L9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg></button>
+  </header>
+
+  <main>
+    <section class="page" id="page-lang">
+      <img class="logo" src="../shell/logo.png" alt="">
+      <h1 data-k="Tubify'a hoş geldin"></h1>
+      <p class="sub" data-k="Reklamsız YouTube ve YouTube Music, indirme yöneticisi ve yerel kitaplık."></p>
+      <h2 data-k="Dilini seç"></h2>
+      <div class="langs" role="radiogroup">
+        <button class="lang" data-lang="tr" role="radio"><span class="code">TR</span><span class="name">Türkçe</span><span class="check"></span></button>
+        <button class="lang" data-lang="en" role="radio"><span class="code">EN</span><span class="name">English</span><span class="check"></span></button>
+      </div>
+      <div class="actions"><button class="primary" id="next" data-k="Devam"></button></div>
+    </section>
+
+    <section class="page" id="page-dir" hidden>
+      <div class="folder-icon"><svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></div>
+      <h1 data-k="İndirmeler nereye kaydedilsin?"></h1>
+      <p class="sub" data-k="Videolar ve şarkılar bu klasöre iner. Daha sonra Ayarlar'dan değiştirebilirsin."></p>
+      <div class="dir">
+        <span class="path" id="dir"></span>
+        <button class="ghost" id="choose" data-k="Klasör seç…"></button>
+      </div>
+      <div class="actions">
+        <button class="link" id="back" data-k="Geri"></button>
+        <button class="primary" id="finish" data-k="Başla"></button>
+      </div>
+    </section>
+  </main>
+  <script src="setup.js"></script>
+</body>
+</html>

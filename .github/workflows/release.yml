@@ -1,0 +1,31 @@
+name: Release
+
+# Builds the Windows installer and portable exe when a v* tag is pushed, then attaches them to the GitHub Release.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build installer
+        run: npx electron-builder --win --x64 --publish never
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/Tubify-Setup-*.exe
+            dist/Tubify-Setup-*.exe.blockmap
+            dist/Tubify-Portable-*.exe
+          generate_release_notes: true

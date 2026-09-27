@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; style-src 'self'; script-src 'self'">
+  <title>Tubify</title>
+  <link rel="stylesheet" href="shell.css">
+</head>
+<body class="mode-video">
+  <header class="topbar">
+    <div class="tb-left">
+      <div class="brand"><span class="brand-mark"></span><span class="brand-name">Tubify</span></div>
+      <div class="navbtns">
+        <button class="icon-btn" id="nav-back" title="Geri (Alt+←)"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg></button>
+        <button class="icon-btn" id="nav-forward" title="İleri (Alt+→)"><svg viewBox="0 0 24 24"><path d="M10 6 8.6 7.4l4.6 4.6-4.6 4.6L10 18l6-6z"/></svg></button>
+        <button class="icon-btn" id="nav-reload" title="Yenile (F5)"><svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
+      </div>
+    </div>
+
+    <div class="switcher" id="switcher" role="tablist" aria-label="Mod">
+      <div class="sw-thumb"></div>
+      <button class="sw-opt" data-mode="video" role="tab" title="Video (Ctrl+1)">
+        <svg viewBox="0 0 24 24"><path d="M10 15.5v-7l6 3.5-6 3.5zM21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.5 2.5 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8z"/></svg>
+        <span>Video</span>
+      </button>
+      <button class="sw-opt" data-mode="music" role="tab" title="Müzik (Ctrl+2)">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+        <span>Müzik</span>
+      </button>
+    </div>
+
+    <div class="tb-right">
+      <div class="np" id="np" hidden>
+        <img class="np-art" id="np-art" alt="">
+        <div class="np-text" id="np-text" title="Bu moda geç">
+          <div class="np-title" id="np-title"></div>
+          <div class="np-sub" id="np-sub"></div>
+        </div>
+        <button class="icon-btn sm" id="np-prev" title="Önceki"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg></button>
+        <button class="icon-btn sm np-play" id="np-toggle" title="Oynat / duraklat"><svg viewBox="0 0 24 24"><path id="np-toggle-path" d="M8 5v14l11-7z"/></svg></button>
+        <button class="icon-btn sm" id="np-next" title="Sonraki"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+      </div>
+      <button class="icon-btn dl-btn" id="dl-btn" title="İndirmeler (Ctrl+J)">
+        <svg class="ring" viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="16"/><circle class="ring-fg" id="ring-fg" cx="18" cy="18" r="16"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+        <span class="badge" id="dl-badge" hidden></span>
+      </button>
+      <button class="icon-btn" id="settings-btn" title="Ayarlar (Ctrl+,)"><svg viewBox="0 0 24 24"><path d="M19.14 12.94a7.07 7.07 0 0 0 0-1.88l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96a7 7 0 0 0-1.62-.94l-.36-2.54A.48.48 0 0 0 13.92 2h-3.84a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.72 8.87a.48.48 0 0 0 .12.61l2.03 1.58a7.07 7.07 0 0 0 0 1.88l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54a7 7 0 0 0 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg></button>
+      <button class="icon-btn" id="more-btn" title="Menü"><svg viewBox="0 0 24 24"><path d="M12 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg></button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <nav class="sb-card sb-nav">
+      <button class="sb-link" data-go="FEmusic_home"><svg viewBox="0 0 24 24"><path d="M12 3 3 10.5V21h6v-6h6v6h6V10.5z"/></svg><span>Ana sayfa</span></button>
+      <button class="sb-link" data-go="FEmusic_explore"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm2.2 12.2L7 17l2.8-7.2L17 7l-2.8 7.2zM12 10.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/></svg><span>Keşfet</span></button>
+      <button class="sb-link" data-page="search"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg><span>Şarkı ara</span></button>
+    </nav>
+
+    <section class="sb-card sb-lib">
+      <div class="sb-lib-head">
+        <button class="sb-lib-title" id="collapse-btn" title="Yan paneli daralt / genişlet (Ctrl+B)">
+          <svg viewBox="0 0 24 24"><path d="M3 22V2h2v20H3zm5 0V2h2v20H8zm6.4-.5L12.9 2.8l1.9-.4 3.6 18.7-2 .4z"/></svg>
+          <span>Kitaplığın</span>
+        </button>
+        <button class="icon-btn sm" id="new-list-btn" title="Yeni çalma listesi oluştur"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip active" data-chip="local">Listelerim</button>
+        <button class="chip" data-chip="account" id="chip-account" hidden>YouTube hesabım</button>
+      </div>
+      <div class="sb-filter">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+        <input id="lib-filter" type="text" placeholder="Kitaplıkta ara" spellcheck="false">
+      </div>
+      <div class="sb-list" id="sb-list"></div>
+    </section>
+  </aside>
+
+  <main class="page" id="page" hidden></main>
+
+  <div class="menu" id="menu" hidden></div>
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="../i18n/renderer.js"></script>
+  <script src="shell.js"></script>
+</body>
+</html>
